@@ -14,7 +14,7 @@ class gameOb():
         self.color = color
         self.reward = reward
         self.name = name
-        
+
 class gameEnv():
     def __init__(self,partial,size):
         self.sizeX = size
@@ -24,11 +24,11 @@ class gameEnv():
         self.partial = partial
         self.bg = np.zeros([size,size])
         a,a_big,measurements,goal,hero = self.reset()
-        
-        
+
+
     def getFeatures(self):
         return np.array([self.objects[0].x,self.objects[0].y]) / float(self.sizeX)
-        
+
     def reset(self):
         self.objects = []
         self.orientation = 0
@@ -40,7 +40,7 @@ class gameEnv():
         for i in range(1):
             bug = gameOb(self.newPosition(0),1,[0,1,0],1,'goal')
             self.objects.append(bug)
-	self.goal = bug
+        self.goal = bug
         state,s_big = self.renderEnv()
         self.state = state
         return state,s_big,self.measurements,[self.goal.x,self.goal.y],[self.hero.x,self.hero.y]
@@ -57,7 +57,7 @@ class gameEnv():
         penalize = 0.
         if action < 4 :
             if self.orientation == 0:
-               direction = action            
+               direction = action
             if self.orientation == 1:
                if action == 0: direction = 1
                elif action == 1: direction = 0
@@ -73,7 +73,7 @@ class gameEnv():
                elif action == 1: direction = 3
                elif action == 2: direction = 1
                elif action == 3: direction = 0
-        
+
             if direction == 0 and hero.y >= 1 and [hero.x,hero.y - 1] not in blockPositions.tolist():
                 hero.y -= 1
             if direction == 1 and hero.y <= self.sizeY-2 and [hero.x,hero.y + 1] not in blockPositions.tolist():
@@ -81,13 +81,13 @@ class gameEnv():
             if direction == 2 and hero.x >= 1 and [hero.x - 1,hero.y] not in blockPositions.tolist():
                 hero.x -= 1
             if direction == 3 and hero.x <= self.sizeX-2 and [hero.x + 1,hero.y] not in blockPositions.tolist():
-                hero.x += 1     
+                hero.x += 1
         if hero.x == heroX and hero.y == heroY:
             penalize = 0.0
         self.objects[0] = hero
-	self.hero = hero
+        self.hero = hero
         return penalize
-    
+
     def newPosition(self,sparcity):
         iterables = [ range(self.sizeX), range(self.sizeY)]
         points = []
@@ -108,16 +108,16 @@ class gameEnv():
                     self.objects.remove(other)
                     ended == True
                     if other.name == 'goal':
-			goal = gameOb(self.newPosition(0),1,[0,1,0],1,'goal')
+                        goal = gameOb(self.newPosition(0),1,[0,1,0],1,'goal')
                         self.objects.append(goal)
-			self.goal = goal
-			self.measurements[0] += 1
+                        self.goal = goal
+                        self.measurements[0] += 1
                         return other.reward,False
-                    if other.name == 'battery': 
-			battery = gameOb([0,0],1,[0,0,1],1,'battery')
+                    if other.name == 'battery':
+                        battery = gameOb([0,0],1,[0,0,1],1,'battery')
                         self.objects.append(battery)
-			self.battery = battery
-			self.measurements[1] = 1.0
+                        self.battery = battery
+                        self.measurements[1] = 1.0
                         return other.reward,False
             if ended == False:
                 return 0.0,False
@@ -141,20 +141,20 @@ class gameEnv():
             #    hero = item
         if self.partial == True:
             a = a[(hero.y):(hero.y+(padding*2)+hero.size),(hero.x):(hero.x+(padding*2)+hero.size),:]
-	a_big = a
-	a_big[self.goal.y+padding:self.goal.y+self.goal.size+padding,self.goal.x+padding:self.goal.x+self.goal.size+padding,:] = [0,1,0]
+        a_big = a
+        a_big[self.goal.y+padding:self.goal.y+self.goal.size+padding,self.goal.x+padding:self.goal.x+self.goal.size+padding,:] = [0,1,0]
         a_big = scipy.misc.imresize(a_big,[32,32,3],interp='nearest')
         return a,a_big
 
     def step(self,action):
-	if self.objects != []:
-	        penalty = self.moveChar(action)
+        if self.objects != []:
+            penalty = self.moveChar(action)
         reward,done = self.checkGoal()
         state,s_big = self.renderEnv()
         if reward == None:
-            print done
-            print reward
-            print penalty
+            print(done)
+            print(reward)
+            print(penalty)
             return state,reward,done
         else:
             goal = None
