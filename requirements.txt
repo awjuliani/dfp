@@ -2,3 +2,4 @@ tensorflow
 numpy
 Pillow
 scipy
+moviepy
