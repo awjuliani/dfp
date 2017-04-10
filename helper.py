@@ -30,25 +30,6 @@ def normalized_columns_initializer(std=1.0):
         return tf.constant(out)
     return _initializer
 
-
-#This code allows gifs to be saved of the training episode for use in the Control Center.
-def make_gif(images, fname, duration=2, true_image=False):
-  import moviepy.editor as mpy
-  
-  def make_frame(t):
-    try:
-      x = images[int(len(images)/duration*t)]
-    except:
-      x = images[-1]
-
-    if true_image:
-      return x.astype(np.uint8)
-    else:
-      return ((x+1)/2*255).astype(np.uint8)
-  
-  clip = mpy.VideoClip(make_frame, duration=duration)
-  clip.write_gif(fname, fps = len(images) / duration,verbose=False)
-
 def set_image_gridworld(frame,measurements,step,goal,hero):
     b = np.ones([840,640,3]) * 255.0
     b = Image.fromarray(b.astype('uint8'))
