@@ -9,10 +9,11 @@ In order to run this notebook, you'll need to install:
 * [TensorFlow v1.0](https://www.tensorflow.org/)
 * [Jupyter](http://jupyter.org/)
 * [NumPy](http://www.numpy.org/)
-* [Scipy]
+* [Scipy](https://www.scipy.org/)
 * [Matplotlib](http://matplotlib.org/)
-* [Pillow]
-* [Imageio]
+* [Pillow](https://python-pillow.org/)
+* [Imageio](https://imageio.github.io/)
+* [Tmux](https://tmux.github.io/)
 
 There are two easy ways to install these libraries and their dependencies:
 
