@@ -44,11 +44,21 @@ There are two easy ways to install these libraries and their dependencies:
     ```
     if you run into permission problems.
 
-5. Launch Jupyter by entering
+5. Launch Jupyter and Tensorboard both by using tmux 
     ```bash
+    tmux
+    
     jupyter notebook
     ```
-    and, using your browser, navigate to the URL shown in the terminal output (usually http://localhost:8888/)
+    `CTL+B, C` to open a new tmux window, then
+    
+    ```
+    cd './dfp'
+    tensorboard --logdir=worker_0:'./train_0',...worker_n:'./train_n'
+    ```
+    Where n depends on number of workers used in async training.
+    
+    Once both jupyter and tensorboard are running, using your browser, navigate to the URLs shown in the terminal output (usually http://localhost:8888/ for Jupyter Notebook and http://localhost:6006/ for Tensorboard)
 
 ### Option B: install Anaconda Python, TensorFlow, and other requirements
 NumPy can be tricky to install manually, so we recommend using the managed Anaconda Python distribution, which includes NumPy, Matplotlib, and Jupyter in a single installation. The Docker-based method above is much easier, but if you have a compatible NVIDIA GPU, manual installation makes it possible to use GPU acceleration to speed up training.
@@ -74,8 +84,18 @@ NumPy can be tricky to install manually, so we recommend using the managed Anaco
 
 6. Use `cd` to navigate into the top directory of the repo on your machine
 
-7. Launch Jupyter by entering
+7. Launch Jupyter and Tensorboard both by using tmux 
     ```bash
+    tmux
+    
     jupyter notebook
     ```
-    and, using your browser, navigate to the URL shown in the terminal output (usually http://localhost:8888/)
+    `CTL+B, C` to open a new tmux window, then
+    
+    ```
+    cd './dfp'
+    tensorboard --logdir=worker_0:'./train_0',...worker_n:'./train_n'
+    ```
+    Where n depends on number of workers used in async training.
+    
+    Once both jupyter and tensorboard are running, using your browser, navigate to the URLs shown in the terminal output (usually http://localhost:8888/ for Jupyter Notebook and http://localhost:6006/ for Tensorboard)
