@@ -1,6 +1,6 @@
 # Reinforcement Learning with Goals
 
-This repo hosts the code associated with my O'Reilly article, "Reinforcement Learning for Various, Complex Goals, Using TensorFlow," published on DATE.
+This repo hosts the code associated with my O'Reilly article, ["Reinforcement Learning for Various, Complex Goals, Using TensorFlow," published on DATE](https://www.oreilly.com/ideas/reinforcement-learning-for-complex-goals-using-tensorflow).
 
 This the code in this repository contains implementations of Deep Q-Network, and [Learning to Act by Predicting the Future](https://arxiv.org/abs/1611.01779).
 
