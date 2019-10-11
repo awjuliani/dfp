@@ -1,4 +1,4 @@
-FROM gcr.io/tensorflow/tensorflow
+FROM tensorflow/tensorflow:latest-devel
 RUN apt-get update && apt-get install -y git-core tmux
 RUN git clone https://github.com/awjuliani/dfp.git /notebooks/dfp
 WORKDIR "/notebooks"
